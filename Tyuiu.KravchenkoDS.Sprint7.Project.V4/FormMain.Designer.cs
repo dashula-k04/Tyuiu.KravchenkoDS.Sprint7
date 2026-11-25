@@ -30,10 +30,10 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             menuStripItem_KDS = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
             открытьToolStripMenuItem = new ToolStripMenuItem();
@@ -84,6 +84,15 @@
             labelSum_KDS = new Label();
             labelCount_KDS = new Label();
             chartBooks_KDS = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ColumnAuthor_KDS = new DataGridViewTextBoxColumn();
+            ColumnTitle_KDS = new DataGridViewTextBoxColumn();
+            ColumnYear_KDS = new DataGridViewTextBoxColumn();
+            ColumnPrice_KDS = new DataGridViewTextBoxColumn();
+            ColumnIsNew_KDS = new DataGridViewCheckBoxColumn();
+            ColumnCopies_KDS = new DataGridViewTextBoxColumn();
+            buttonAdd_KDS = new Button();
+            buttonEdit_KDS = new Button();
+            buttonDelete_KDS = new Button();
             menuStripItem_KDS.SuspendLayout();
             panelTools_KDS.SuspendLayout();
             groupBoxControl_KDS.SuspendLayout();
@@ -104,7 +113,7 @@
             menuStripItem_KDS.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, данныеToolStripMenuItem, справкаToolStripMenuItem });
             menuStripItem_KDS.Location = new Point(0, 0);
             menuStripItem_KDS.Name = "menuStripItem_KDS";
-            menuStripItem_KDS.Size = new Size(1270, 28);
+            menuStripItem_KDS.Size = new Size(1246, 28);
             menuStripItem_KDS.TabIndex = 0;
             menuStripItem_KDS.Text = "menuStrip_KDS";
             // 
@@ -217,7 +226,7 @@
             panelTools_KDS.Dock = DockStyle.Top;
             panelTools_KDS.Location = new Point(0, 28);
             panelTools_KDS.Name = "panelTools_KDS";
-            panelTools_KDS.Size = new Size(1270, 82);
+            panelTools_KDS.Size = new Size(1246, 82);
             panelTools_KDS.TabIndex = 1;
             // 
             // buttonHelp_KDS
@@ -281,6 +290,9 @@
             // groupBoxControl_KDS
             // 
             groupBoxControl_KDS.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxControl_KDS.Controls.Add(buttonDelete_KDS);
+            groupBoxControl_KDS.Controls.Add(buttonEdit_KDS);
+            groupBoxControl_KDS.Controls.Add(buttonAdd_KDS);
             groupBoxControl_KDS.Controls.Add(buttonReset_KDS);
             groupBoxControl_KDS.Controls.Add(buttonFilterYear_KDS);
             groupBoxControl_KDS.Controls.Add(numericUpDownTo_KDS);
@@ -295,7 +307,7 @@
             groupBoxControl_KDS.Controls.Add(labelSearch_KDS);
             groupBoxControl_KDS.Location = new Point(3, 114);
             groupBoxControl_KDS.Name = "groupBoxControl_KDS";
-            groupBoxControl_KDS.Size = new Size(1267, 101);
+            groupBoxControl_KDS.Size = new Size(1243, 108);
             groupBoxControl_KDS.TabIndex = 2;
             groupBoxControl_KDS.TabStop = false;
             groupBoxControl_KDS.Text = "Управление данными";
@@ -374,7 +386,7 @@
             // 
             comboBoxSort_KDS.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSort_KDS.FormattingEnabled = true;
-            comboBoxSort_KDS.Items.AddRange(new object[] { "По автору ", "По году ", "По цене" });
+            comboBoxSort_KDS.Items.AddRange(new object[] { "Автор", "Название", "Год", "Цена", "Количество" });
             comboBoxSort_KDS.Location = new Point(458, 23);
             comboBoxSort_KDS.Name = "comboBoxSort_KDS";
             comboBoxSort_KDS.Size = new Size(151, 28);
@@ -419,7 +431,7 @@
             // splitContainerMain_KDS
             // 
             splitContainerMain_KDS.Dock = DockStyle.Bottom;
-            splitContainerMain_KDS.Location = new Point(0, 207);
+            splitContainerMain_KDS.Location = new Point(0, 214);
             splitContainerMain_KDS.Name = "splitContainerMain_KDS";
             // 
             // splitContainerMain_KDS.Panel1
@@ -430,22 +442,27 @@
             // 
             splitContainerMain_KDS.Panel2.Controls.Add(chartBooks_KDS);
             splitContainerMain_KDS.Panel2.Controls.Add(groupBoxStat_KDS);
-            splitContainerMain_KDS.Size = new Size(1270, 367);
-            splitContainerMain_KDS.SplitterDistance = 731;
+            splitContainerMain_KDS.Size = new Size(1246, 367);
+            splitContainerMain_KDS.SplitterDistance = 717;
             splitContainerMain_KDS.TabIndex = 3;
             // 
             // dataGridViewBooks_KDS
             // 
             dataGridViewBooks_KDS.AllowUserToAddRows = false;
+            dataGridViewBooks_KDS.AllowUserToDeleteRows = false;
             dataGridViewBooks_KDS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewBooks_KDS.BackgroundColor = Color.White;
             dataGridViewBooks_KDS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBooks_KDS.Columns.AddRange(new DataGridViewColumn[] { ColumnAuthor_KDS, ColumnTitle_KDS, ColumnYear_KDS, ColumnPrice_KDS, ColumnIsNew_KDS, ColumnCopies_KDS });
             dataGridViewBooks_KDS.Dock = DockStyle.Fill;
             dataGridViewBooks_KDS.Location = new Point(0, 0);
+            dataGridViewBooks_KDS.MultiSelect = false;
             dataGridViewBooks_KDS.Name = "dataGridViewBooks_KDS";
             dataGridViewBooks_KDS.ReadOnly = true;
+            dataGridViewBooks_KDS.RowHeadersVisible = false;
             dataGridViewBooks_KDS.RowHeadersWidth = 51;
             dataGridViewBooks_KDS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewBooks_KDS.Size = new Size(731, 367);
+            dataGridViewBooks_KDS.Size = new Size(717, 367);
             dataGridViewBooks_KDS.TabIndex = 0;
             // 
             // groupBoxStat_KDS
@@ -456,9 +473,9 @@
             groupBoxStat_KDS.Controls.Add(labelSum_KDS);
             groupBoxStat_KDS.Controls.Add(labelCount_KDS);
             groupBoxStat_KDS.Dock = DockStyle.Bottom;
-            groupBoxStat_KDS.Location = new Point(0, 187);
+            groupBoxStat_KDS.Location = new Point(0, 193);
             groupBoxStat_KDS.Name = "groupBoxStat_KDS";
-            groupBoxStat_KDS.Size = new Size(535, 180);
+            groupBoxStat_KDS.Size = new Size(525, 174);
             groupBoxStat_KDS.TabIndex = 0;
             groupBoxStat_KDS.TabStop = false;
             groupBoxStat_KDS.Text = "Статистика";
@@ -466,76 +483,146 @@
             // labelMax_KDS
             // 
             labelMax_KDS.AutoSize = true;
-            labelMax_KDS.Location = new Point(3, 103);
+            labelMax_KDS.Location = new Point(0, 103);
             labelMax_KDS.Name = "labelMax_KDS";
-            labelMax_KDS.Size = new Size(93, 20);
+            labelMax_KDS.Size = new Size(166, 20);
             labelMax_KDS.TabIndex = 4;
-            labelMax_KDS.Text = "Максимум:0";
+            labelMax_KDS.Text = "Максимальная цена: 0";
             // 
             // labelMin_KDS
             // 
             labelMin_KDS.AutoSize = true;
-            labelMin_KDS.Location = new Point(3, 83);
+            labelMin_KDS.Location = new Point(0, 83);
             labelMin_KDS.Name = "labelMin_KDS";
-            labelMin_KDS.Size = new Size(89, 20);
+            labelMin_KDS.Size = new Size(162, 20);
             labelMin_KDS.TabIndex = 3;
-            labelMin_KDS.Text = "Минимум:0";
+            labelMin_KDS.Text = "Минимальная цена: 0";
             // 
             // labelAvg_KDS
             // 
             labelAvg_KDS.AutoSize = true;
-            labelAvg_KDS.Location = new Point(3, 63);
+            labelAvg_KDS.Location = new Point(0, 63);
             labelAvg_KDS.Name = "labelAvg_KDS";
-            labelAvg_KDS.Size = new Size(79, 20);
+            labelAvg_KDS.Size = new Size(121, 20);
             labelAvg_KDS.TabIndex = 2;
-            labelAvg_KDS.Text = "Среднее:0";
+            labelAvg_KDS.Text = "Средняя цена: 0";
             // 
             // labelSum_KDS
             // 
             labelSum_KDS.AutoSize = true;
-            labelSum_KDS.Location = new Point(6, 43);
+            labelSum_KDS.Location = new Point(0, 43);
             labelSum_KDS.Name = "labelSum_KDS";
-            labelSum_KDS.Size = new Size(66, 20);
+            labelSum_KDS.Size = new Size(100, 20);
             labelSum_KDS.TabIndex = 1;
-            labelSum_KDS.Text = "Сумма:0";
+            labelSum_KDS.Text = "Сумма цен: 0";
             // 
             // labelCount_KDS
             // 
             labelCount_KDS.AutoSize = true;
-            labelCount_KDS.Location = new Point(2, 23);
+            labelCount_KDS.Location = new Point(0, 23);
             labelCount_KDS.Name = "labelCount_KDS";
-            labelCount_KDS.Size = new Size(101, 20);
+            labelCount_KDS.Size = new Size(140, 20);
             labelCount_KDS.TabIndex = 0;
-            labelCount_KDS.Text = "Количество:0";
+            labelCount_KDS.Text = "Количество книг: 0";
             // 
             // chartBooks_KDS
             // 
-            chartArea2.AxisX.Title = "Год издания";
-            chartArea2.AxisY.Title = "Количество";
-            chartArea2.Name = "ChartArea1";
-            chartBooks_KDS.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.Title = "Год издания";
+            chartArea1.AxisY.Title = "Кол-во книг";
+            chartArea1.Name = "ChartArea1";
+            chartBooks_KDS.ChartAreas.Add(chartArea1);
             chartBooks_KDS.Dock = DockStyle.Fill;
-            legend2.Name = "Legend1";
-            chartBooks_KDS.Legends.Add(legend2);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            chartBooks_KDS.Legends.Add(legend1);
             chartBooks_KDS.Location = new Point(0, 0);
             chartBooks_KDS.Name = "chartBooks_KDS";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Количество книг";
-            chartBooks_KDS.Series.Add(series2);
-            chartBooks_KDS.Size = new Size(535, 187);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Количество книг";
+            chartBooks_KDS.Series.Add(series1);
+            chartBooks_KDS.Size = new Size(525, 193);
             chartBooks_KDS.TabIndex = 1;
             chartBooks_KDS.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Количество книг по годам";
-            chartBooks_KDS.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "Количество книг по годам";
+            chartBooks_KDS.Titles.Add(title1);
+            // 
+            // ColumnAuthor_KDS
+            // 
+            ColumnAuthor_KDS.HeaderText = "Автор";
+            ColumnAuthor_KDS.MinimumWidth = 6;
+            ColumnAuthor_KDS.Name = "ColumnAuthor_KDS";
+            ColumnAuthor_KDS.ReadOnly = true;
+            // 
+            // ColumnTitle_KDS
+            // 
+            ColumnTitle_KDS.HeaderText = "Название";
+            ColumnTitle_KDS.MinimumWidth = 6;
+            ColumnTitle_KDS.Name = "ColumnTitle_KDS";
+            ColumnTitle_KDS.ReadOnly = true;
+            // 
+            // ColumnYear_KDS
+            // 
+            ColumnYear_KDS.HeaderText = "Год";
+            ColumnYear_KDS.MinimumWidth = 6;
+            ColumnYear_KDS.Name = "ColumnYear_KDS";
+            ColumnYear_KDS.ReadOnly = true;
+            // 
+            // ColumnPrice_KDS
+            // 
+            ColumnPrice_KDS.HeaderText = "Цена";
+            ColumnPrice_KDS.MinimumWidth = 6;
+            ColumnPrice_KDS.Name = "ColumnPrice_KDS";
+            ColumnPrice_KDS.ReadOnly = true;
+            // 
+            // ColumnIsNew_KDS
+            // 
+            ColumnIsNew_KDS.HeaderText = "Новое издание";
+            ColumnIsNew_KDS.MinimumWidth = 6;
+            ColumnIsNew_KDS.Name = "ColumnIsNew_KDS";
+            ColumnIsNew_KDS.ReadOnly = true;
+            // 
+            // ColumnCopies_KDS
+            // 
+            ColumnCopies_KDS.HeaderText = "Количество";
+            ColumnCopies_KDS.MinimumWidth = 6;
+            ColumnCopies_KDS.Name = "ColumnCopies_KDS";
+            ColumnCopies_KDS.ReadOnly = true;
+            // 
+            // buttonAdd_KDS
+            // 
+            buttonAdd_KDS.Location = new Point(892, 23);
+            buttonAdd_KDS.Name = "buttonAdd_KDS";
+            buttonAdd_KDS.Size = new Size(100, 63);
+            buttonAdd_KDS.TabIndex = 11;
+            buttonAdd_KDS.Text = "Добавить";
+            buttonAdd_KDS.UseVisualStyleBackColor = true;
+            // 
+            // buttonEdit_KDS
+            // 
+            buttonEdit_KDS.Location = new Point(1011, 23);
+            buttonEdit_KDS.Name = "buttonEdit_KDS";
+            buttonEdit_KDS.Size = new Size(100, 63);
+            buttonEdit_KDS.TabIndex = 12;
+            buttonEdit_KDS.Text = "Изменить";
+            buttonEdit_KDS.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete_KDS
+            // 
+            buttonDelete_KDS.Location = new Point(1134, 23);
+            buttonDelete_KDS.Name = "buttonDelete_KDS";
+            buttonDelete_KDS.Size = new Size(100, 63);
+            buttonDelete_KDS.TabIndex = 13;
+            buttonDelete_KDS.Text = "Удалить";
+            buttonDelete_KDS.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Azure;
-            ClientSize = new Size(1270, 574);
+            ClientSize = new Size(1246, 581);
             Controls.Add(splitContainerMain_KDS);
             Controls.Add(groupBoxControl_KDS);
             Controls.Add(panelTools_KDS);
@@ -614,5 +701,14 @@
         private Label labelMax_KDS;
         private Label labelMin_KDS;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartBooks_KDS;
+        private DataGridViewTextBoxColumn ColumnAuthor_KDS;
+        private DataGridViewTextBoxColumn ColumnTitle_KDS;
+        private DataGridViewTextBoxColumn ColumnYear_KDS;
+        private DataGridViewTextBoxColumn ColumnPrice_KDS;
+        private DataGridViewCheckBoxColumn ColumnIsNew_KDS;
+        private DataGridViewTextBoxColumn ColumnCopies_KDS;
+        private Button buttonEdit_KDS;
+        private Button buttonAdd_KDS;
+        private Button buttonDelete_KDS;
     }
 }
